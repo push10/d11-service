@@ -1,0 +1,1 @@
+select * from D11_DB.contest;
