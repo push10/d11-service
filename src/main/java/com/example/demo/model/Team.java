@@ -11,6 +11,7 @@ import javax.persistence.Table;
 public class Team {
     private int id;
     private String name;
+    private String shortName;
     
  
     
@@ -29,6 +30,15 @@ public class Team {
 		this.name = name;
 	}
 
+
+	public String getShortName() {
+		return shortName;
+	}
+	public void setShortName(String shortName) {
+		this.shortName = shortName;
+	}
+
+	
     
 	
 }

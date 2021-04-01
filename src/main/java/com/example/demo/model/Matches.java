@@ -1,8 +1,12 @@
 package com.example.demo.model;
 
+import java.sql.Date;
+import java.time.LocalDateTime;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -22,6 +26,14 @@ public class Matches {
 	private Team team2;
 
 	private Contest contest;
+
+	private String venue;
+	
+	private String city;
+	
+	private Integer matchNo;
+	
+	private LocalDateTime schedule;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -64,5 +76,41 @@ public class Matches {
 	public void setContest(Contest contest) {
 		this.contest = contest;
 	}
+
+	public String getVenue() {
+		return venue;
+	}
+
+	public void setVenue(String venue) {
+		this.venue = venue;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	@Column(name = "match_no")
+	public Integer getMatchNo() {
+		return matchNo;
+	}
+
+	public void setMatchNo(Integer matchNo) {
+		this.matchNo = matchNo;
+	}
+
+	public LocalDateTime getSchedule() {
+		return schedule;
+	}
+
+	public void setSchedule(LocalDateTime schedule) {
+		this.schedule = schedule;
+	}
+	
+	
+	
 
 }
