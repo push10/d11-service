@@ -11,6 +11,9 @@ public class User {
     private String username;
     private String password;
     
+   
+    private transient boolean accessToken =true;
+    
     private String message;
 
     public User() {
@@ -67,6 +70,16 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	 @Transient
+	public boolean isAccessToken() {
+		return accessToken;
+	}
+
+	public void setAccessToken(boolean accessToken) {
+		this.accessToken = accessToken;
+	}
     
+	
     
 }
