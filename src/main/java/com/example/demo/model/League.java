@@ -22,6 +22,10 @@ public class League {
 	private int id;
     private String joiningCode;
     private Contest contest;
+    
+    private String name;
+    private int entryAmt;
+    private int maxUsers;
 
    
 
@@ -75,6 +79,30 @@ public class League {
 
 	public void setUser(List<User> user) {
 		this.user = user;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getEntryAmt() {
+		return entryAmt;
+	}
+
+	public void setEntryAmt(int entryAmt) {
+		this.entryAmt = entryAmt;
+	}
+
+	public int getMaxUsers() {
+		return maxUsers;
+	}
+
+	public void setMaxUsers(int maxUsers) {
+		this.maxUsers = maxUsers;
 	}
 	
 	

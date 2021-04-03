@@ -31,6 +31,11 @@ public class LeagueController {
 	public List<League> list() {
 		return leagueService.listAllLeague();
 	}
+	
+	@GetMapping("/list/{userId}")
+	public List<League> listByUser(@PathVariable Integer userId) { 
+		return leagueService.listAllLeagueForUser(userId);
+	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<League> get(@PathVariable Integer id) {
@@ -47,6 +52,7 @@ public class LeagueController {
 		Map<String, String> response = new HashMap<String, String>();
 		try {
 			leagueService.saveLeague(league);
+			response.put("success", "League creation success.");
 			return ResponseEntity.accepted().body(response);
 		} catch (NoSuchElementException e) {
 			response.put("error", "League creation fail.");
@@ -55,12 +61,15 @@ public class LeagueController {
 	}
 
 	@PutMapping("/joinContest/{userId}")
-	public ResponseEntity<HttpStatus> joinLeague(@PathVariable Integer userId, @RequestBody League league) {
+	public ResponseEntity<Map<String, String>>  joinLeague(@PathVariable Integer userId, @RequestBody League league) {
+		Map<String, String> response = new HashMap<String, String>();
 		try {
 			leagueService.joinLeague(userId, league.getJoiningCode());
-			return new ResponseEntity<HttpStatus>(HttpStatus.OK);
-		} catch (NoSuchElementException e) {
-			return new ResponseEntity<HttpStatus>(HttpStatus.INTERNAL_SERVER_ERROR);
+			response.put("success", "League creation success.");
+			return ResponseEntity.accepted().body(response);
+		} catch (Exception e) {
+			response.put("error", "League join fail.");
+			return ResponseEntity.status(HttpStatus.IM_USED).body(response);
 		}
 
 	}

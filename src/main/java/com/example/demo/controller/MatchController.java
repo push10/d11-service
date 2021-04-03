@@ -42,7 +42,7 @@ public class MatchController {
 	}
 	@GetMapping("/contest/{id}")
 	public List<Matches> list(@PathVariable Integer id) {
-		return matchService.loadByContest(id);
+		return matchService.loadByContest(id).subList(1, 10);
 	}
 	@PostMapping("/saveMatch")
 	public ResponseEntity<Map<String, String>> add(@RequestBody Matches match) {
