@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import java.util.List;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
@@ -11,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "league_user_match_details")
@@ -22,6 +25,8 @@ public class LeagueUserDetails {
 	
 	private boolean isPaymentDone;
 	private boolean isWinner;
+	
+	private List<User> allUsersForLeague;
 	
 
 	@Id
@@ -84,6 +89,16 @@ public class LeagueUserDetails {
 		this.isWinner = isWinner;
 	}
 
+	@Transient
+	public List<User> getAllUsersForLeague() {
+		return allUsersForLeague;
+	}
+
+	public void setAllUsersForLeague(List<User> allUsersForLeague) {
+		this.allUsersForLeague = allUsersForLeague;
+	}
+
+	
 	
 
 }
