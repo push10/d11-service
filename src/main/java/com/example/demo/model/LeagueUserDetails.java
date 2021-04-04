@@ -24,7 +24,7 @@ public class LeagueUserDetails {
 	private Matches match; 
 	
 	private boolean isPaymentDone;
-	private boolean isWinner;
+	private User winnerUser;
 	
 	private List<User> allUsersForLeague;
 	
@@ -81,12 +81,17 @@ public class LeagueUserDetails {
 		this.isPaymentDone = isPaymentDone;
 	}
 
-	public boolean isWinner() {
-		return isWinner;
+
+	
+	@Access(AccessType.PROPERTY)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "winnerUser")
+	public User getWinnerUser() {
+		return winnerUser;
 	}
 
-	public void setWinner(boolean isWinner) {
-		this.isWinner = isWinner;
+	public void setWinnerUser(User winnerUser) {
+		this.winnerUser = winnerUser;
 	}
 
 	@Transient
