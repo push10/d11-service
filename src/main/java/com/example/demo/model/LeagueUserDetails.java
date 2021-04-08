@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -27,6 +28,10 @@ public class LeagueUserDetails {
 	private User winnerUser;
 	
 	private List<User> allUsersForLeague;
+	
+	private List<String> nonPaidUsers; 
+	
+	private Map<String, UserInvestmentDetails> userInvestementDetails;
 	
 
 	@Id
@@ -103,6 +108,25 @@ public class LeagueUserDetails {
 		this.allUsersForLeague = allUsersForLeague;
 	}
 
+	@Transient
+	public List<String> getNonPaidUsers() {
+		return nonPaidUsers;
+	}
+
+	public void setNonPaidUsers(List<String> nonPaidUsers) {
+		this.nonPaidUsers = nonPaidUsers;
+	}
+
+	@Transient
+	public Map<String, UserInvestmentDetails> getUserInvestementDetails() {
+		return userInvestementDetails;
+	}
+
+	public void setUserInvestementDetails(Map<String, UserInvestmentDetails> userInvestementDetails) {
+		this.userInvestementDetails = userInvestementDetails;
+	}
+
+	
 	
 	
 

@@ -24,5 +24,9 @@ public class LeagueUsersDetailsController {
 	public List<LeagueUserDetails> list(@PathVariable int userId, @PathVariable int leagueId) {
 		return leagueUserDetailsService.loadLeagueUserDetails(userId, leagueId);
 	}
+	
+	public List<String> listNonPaidUsers( @PathVariable int leagueId) {
+		return leagueUserDetailsService.loadNonPaidUser(leagueId);
+	}
 
 }
