@@ -11,6 +11,6 @@ import com.example.demo.model.User;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 	
-	@Query("SELECT r FROM User r WHERE r.username=:username")
-	public List<User> findByUserName(@Param("username") String username);
+	@Query("SELECT r FROM User r WHERE r.username=:username and r.password=:password")
+	public List<User> findByUserName(@Param("username") String username, @Param("password") String password);
 }

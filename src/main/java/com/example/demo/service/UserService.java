@@ -30,7 +30,7 @@ public class UserService {
         userRepository.deleteById(id);
     }
     
-    public List<User> loadByUserName(String userName) {
-        return userRepository.findByUserName(userName);
+    public List<User> loadByUserName(String userName, String password) {
+        return userRepository.findByUserName(userName,password);
     }
 }

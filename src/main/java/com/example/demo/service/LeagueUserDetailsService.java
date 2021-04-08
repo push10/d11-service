@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
@@ -47,26 +48,26 @@ public class LeagueUserDetailsService {
 
 		leagueUserDetails.forEach(leagueUserDetail -> {
 			String key = leagueUserDetail.getLeague().getId() + "-" + leagueUserDetail.getUser().getId();
-			String winnerKey = leagueUserDetail.getLeague().getId() + "-" + leagueUserDetail.getWinnerUser().getId();
-			
+
 			userInvestementDetails.putIfAbsent(key, new UserInvestmentDetails());
-			
+
 			Integer countInvestment = investmentCount.getOrDefault(key, 0);
 			investmentCount.put(key, countInvestment + leagueUserDetail.getLeague().getEntryAmt());
 
-			Integer countWinner = winnerCount.getOrDefault(winnerKey, leagueUserDetail.getLeague().getEntryAmt());
-			winnerCount.put(winnerKey, countWinner + leagueUserDetail.getLeague().getEntryAmt());
 			
+			if (!Objects.isNull(leagueUserDetail.getWinnerUser())) {
+				String winnerKey = leagueUserDetail.getLeague().getId() + "-"
+						+ leagueUserDetail.getWinnerUser().getId();
+				Integer countWinner = winnerCount.getOrDefault(winnerKey, leagueUserDetail.getLeague().getEntryAmt());
+				winnerCount.put(winnerKey, countWinner + leagueUserDetail.getLeague().getEntryAmt());
+			}
 
 		});
 
-		userInvestementDetails.forEach((k,v)->{
+		userInvestementDetails.forEach((k, v) -> {
 			v.setTotalInvestmentAmt(investmentCount.get(k));
 			v.setWinningAmt(winnerCount.get(k) != null ? winnerCount.get(k) : 0);
 		});
-		
-		
-		
 
 		return userInvestementDetails;
 	}

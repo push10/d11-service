@@ -9,6 +9,7 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -77,23 +78,16 @@ public class UserController {
 
 	@PostMapping("/login")
 	public ResponseEntity<User> login(@RequestBody User user) {
-		User dbUser = null;
 		try {
-			List<User> users = userService.loadByUserName(user.getUsername());
-			String userName = user.getUsername();
-			dbUser = users.stream().filter(u -> userName.equals(u.getUsername())) 
-					.findAny() 
-					.orElse(null);
-			if(Objects.isNull(dbUser)) {
+			List<User> users = userService.loadByUserName(user.getUsername(), user.getPassword());
+			if (CollectionUtils.isEmpty(users)) {
 				return new ResponseEntity<User>(new User("User not found"), HttpStatus.NOT_FOUND);
-			}else if(!dbUser.getPassword().equals(user.getPassword())){
-				return new ResponseEntity<User>(new User("Incorrect password"), HttpStatus.NOT_FOUND);
 			}
-			
+			System.out.println("===========> user loaded " + users.get(0).getFirstName());
+			return new ResponseEntity<User>(users.get(0), HttpStatus.OK);
 		} catch (NoSuchElementException e) {
 			return new ResponseEntity<User>(new User("User not found"), HttpStatus.NOT_FOUND);
 		}
-		System.out.println("===========> user loaded "+dbUser.getFirstName());
-		return new ResponseEntity<User>(dbUser, HttpStatus.OK);
+
 	}
 }
