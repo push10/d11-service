@@ -18,7 +18,7 @@ public interface LeagueRepository extends JpaRepository<League, Integer> {
 	@Query(value = "insert into league_users (league, user) values ( :league, :user)", nativeQuery = true)
 	public void joinContestByCode(@Param("league") int league, @Param("user") int user);
 	
-	@Query( value = "SELECT l.* FROM league l, d11_db.users u, d11_db.league_users lu \r\n" + 
+	@Query( value = "SELECT l.* FROM league l, users u, league_users lu \r\n" + 
 			"where l.id = lu.league\r\n" + 
 			"and u.id  = lu.user\r\n" + 
 			"and lu.user =:userId ",

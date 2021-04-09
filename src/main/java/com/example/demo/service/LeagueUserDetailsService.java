@@ -58,7 +58,7 @@ public class LeagueUserDetailsService {
 			if (!Objects.isNull(leagueUserDetail.getWinnerUser())) {
 				String winnerKey = leagueUserDetail.getLeague().getId() + "-"
 						+ leagueUserDetail.getWinnerUser().getId();
-				Integer countWinner = winnerCount.getOrDefault(winnerKey, leagueUserDetail.getLeague().getEntryAmt());
+				Integer countWinner = winnerCount.getOrDefault(winnerKey, 0);
 				winnerCount.put(winnerKey, countWinner + leagueUserDetail.getLeague().getEntryAmt());
 			}
 
