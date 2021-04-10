@@ -32,6 +32,9 @@ public class LeagueUserDetailsService {
 		return leagueUserDetails;
 	}
 
+	public void updateWinner(int userId, int leagueId, int matchId) {
+		leagueUserDetailsRepository.updateWinner(userId, leagueId, matchId);
+	}
 	public List<String> loadNonPaidUser(int leagueId) {
 		List<LeagueUserDetails> leagueUserDetails = leagueUserDetailsRepository.loadNonPaidUsersForLeague(leagueId);
 		return leagueUserDetails.parallelStream()

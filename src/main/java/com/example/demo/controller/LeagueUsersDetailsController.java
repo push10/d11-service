@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,8 +26,14 @@ public class LeagueUsersDetailsController {
 		return leagueUserDetailsService.loadLeagueUserDetails(userId, leagueId);
 	}
 	
+	@PutMapping("/{userId}/{leagueId}/{matchId}")
+	public void updateWinner(@PathVariable int userId, @PathVariable int leagueId, @PathVariable int matchId) {
+		leagueUserDetailsService.updateWinner(userId, leagueId, matchId);
+	}
+	
 	public List<String> listNonPaidUsers( @PathVariable int leagueId) {
 		return leagueUserDetailsService.loadNonPaidUser(leagueId);
 	}
-
+	
+	
 }

@@ -18,4 +18,9 @@ public interface LeagueUserDetailsRepository extends JpaRepository<LeagueUserDet
 	@Query(value = "SELECT m FROM LeagueUserDetails m WHERE m.league.id=:leagueId and m.paymentDone=true ")
 	public List<LeagueUserDetails> loadUserParticipatedGames(@Param("leagueId") int leagueId);
 
+	@Query(value = "update  `d11-prod`.league_user_match_details\r\n" + 
+			"set winner_user=:userId \r\n" + 
+			"where `match`=:matchId and league=:leagueId", nativeQuery = true)
+	public void updateWinner(@Param("userId") int userId, @Param("leagueId") int leagueId, @Param("matchId") int matchId);
+
 }
