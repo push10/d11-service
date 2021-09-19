@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,6 +13,9 @@ import com.example.demo.model.Matches;
 public interface MatchRepository  extends JpaRepository<Matches, Integer> {
 	@Query("SELECT m FROM Matches m WHERE m.contest.id=:contestId")
 	public List<Matches> loadByContest(@Param("contestId") int contestId);
+	
+	@Query("SELECT m FROM Matches m WHERE m.schedule  BETWEEN :startDate AND :endDate")
+	public List<Matches> loadByDate(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate  );
 	
 	@Modifying
 	@Query(value = "insert into league_user_match_details (`league`, `user`, `match`) values ( :league, :user, :match)", nativeQuery = true)

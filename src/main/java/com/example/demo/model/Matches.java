@@ -1,6 +1,5 @@
 package com.example.demo.model;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
 
 import javax.persistence.Access;
@@ -15,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "matches")
@@ -34,6 +34,8 @@ public class Matches {
 	private Integer matchNo;
 	
 	private LocalDateTime schedule;
+	
+	private Bet bet;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -108,6 +110,15 @@ public class Matches {
 
 	public void setSchedule(LocalDateTime schedule) {
 		this.schedule = schedule;
+	}
+
+	@Transient
+	public Bet getBet() {
+		return bet;
+	}
+
+	public void setBet(Bet bet) {
+		this.bet = bet;
 	}
 	
 	

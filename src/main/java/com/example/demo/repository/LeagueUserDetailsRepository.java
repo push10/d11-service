@@ -13,16 +13,16 @@ public interface LeagueUserDetailsRepository extends JpaRepository<LeagueUserDet
 	@Query("SELECT m FROM LeagueUserDetails m WHERE m.league.id=:leagueId and m.user.id=:userId")
 	public List<LeagueUserDetails> loadByContest(@Param("userId") int userId, @Param("leagueId") int leagueId);
 
-	@Query("SELECT m FROM LeagueUserDetails m WHERE m.league.id=:leagueId and m.paymentDone=false")
+	@Query("SELECT m FROM LeagueUserDetails m WHERE m.league.id=:leagueId and m.paymentDone=0")
 	public List<LeagueUserDetails> loadNonPaidUsersForLeague(@Param("leagueId") int leagueId);
 
-	@Query(value = "SELECT m FROM LeagueUserDetails m WHERE m.league.id=:leagueId and m.paymentDone=true ")
+	@Query(value = "SELECT m FROM LeagueUserDetails m WHERE m.league.id=:leagueId and m.paymentDone=1 ")
 	public List<LeagueUserDetails> loadUserParticipatedGames(@Param("leagueId") int leagueId);
 
 	@Modifying
-	@Query(value = "update league_user_match_details\r\n" + 
-			"set winner_user=:userId \r\n" + 
-			"where `match`=:matchId and league=:leagueId", nativeQuery = true)
-	public void updateWinner(@Param("userId") int userId, @Param("leagueId") int leagueId, @Param("matchId") int matchId);
+	@Query(value = "update league_user_match_details\r\n" + "set winner_user=:userId \r\n"
+			+ "where `match`=:matchId and league=:leagueId", nativeQuery = true)
+	public void updateWinner(@Param("userId") int userId, @Param("leagueId") int leagueId,
+			@Param("matchId") int matchId);
 
 }

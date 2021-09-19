@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -13,26 +14,31 @@ import com.example.demo.repository.MatchRepository;
 @Service
 @Transactional
 public class MatchService {
-    @Autowired
-    private MatchRepository matchRepository;
-    public List<Matches> listAllMatches() {
-        return matchRepository.findAll();
-    }
+	@Autowired
+	private MatchRepository matchRepository;
 
-    public void saveMatch(Matches match) {
-    	matchRepository.save(match);
-    }
+	public List<Matches> listAllMatches() {
+		return matchRepository.findAll();
+	}
 
-    public Matches getMatch(Integer id) {
-        return matchRepository.findById(id).get();
-    }
+	public void saveMatch(Matches match) {
+		matchRepository.save(match);
+	}
 
-    public void deleteMatch(Integer id) {
-    	matchRepository.deleteById(id);
-    }
-    
-    public List<Matches> loadByContest(int contestId) {
-        return matchRepository.loadByContest(contestId);
-    }
-    
+	public Matches getMatch(Integer id) {
+		return matchRepository.findById(id).get();
+	}
+
+	public void deleteMatch(Integer id) {
+		matchRepository.deleteById(id);
+	}
+
+	public List<Matches> loadByContest(int contestId) {
+		return matchRepository.loadByContest(contestId);
+	}
+
+	public List<Matches> loadByDate(LocalDateTime startDate, LocalDateTime endDate) {
+		return matchRepository.loadByDate(startDate, endDate);
+	}
+
 }
