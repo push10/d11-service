@@ -11,7 +11,7 @@ import org.springframework.data.repository.query.Param;
 import com.example.demo.model.Matches;
 
 public interface MatchRepository  extends JpaRepository<Matches, Integer> {
-	@Query("SELECT m FROM Matches m WHERE m.contest.id=:contestId")
+	@Query("SELECT m FROM Matches m WHERE m.contest.id=:contestId order by m.matchNo")
 	public List<Matches> loadByContest(@Param("contestId") int contestId);
 	
 	@Query("SELECT m FROM Matches m WHERE m.schedule  BETWEEN :startDate AND :endDate")
